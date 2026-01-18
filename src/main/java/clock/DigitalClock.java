@@ -24,8 +24,8 @@ package clock;
  */
 public class DigitalClock {
     
-    // TODO: Add private field(s) to store the time
-    // Hint: Consider storing as seconds since midnight
+    /** Seconds since midnight [0, 86399] */
+    private final int secondsSinceMidnight;
     
     /**
      * Creates a digital clock with the given time.
@@ -39,12 +39,23 @@ public class DigitalClock {
      * @throws IllegalArgumentException if any parameter is out of its valid range
      */
     public DigitalClock(int hours, int minutes, int seconds) {
-        // TODO: Validate hours (0-23)
-        // TODO: Validate minutes (0-59)
-        // TODO: Validate seconds (0-59)
-        // TODO: Store the time (consider converting to seconds since midnight)
+        // Validate hours (0-23)
+        if (hours < 0 || hours > 23) {
+            throw new IllegalArgumentException("Hours must be between 0 and 23, got: " + hours);
+        }
         
-        throw new UnsupportedOperationException("Constructor not yet implemented");
+        // Validate minutes (0-59)
+        if (minutes < 0 || minutes > 59) {
+            throw new IllegalArgumentException("Minutes must be between 0 and 59, got: " + minutes);
+        }
+        
+        // Validate seconds (0-59)
+        if (seconds < 0 || seconds > 59) {
+            throw new IllegalArgumentException("Seconds must be between 0 and 59, got: " + seconds);
+        }
+        
+        // Store the time as seconds since midnight
+        this.secondsSinceMidnight = (hours * 3600) + (minutes * 60) + seconds;
     }
     
     /**
@@ -56,11 +67,13 @@ public class DigitalClock {
      * @return Time formatted as "HH:MM:SS" with zero-padding
      */
     public String getDecimal() {
-        // TODO: Convert seconds since midnight back to hours, minutes, seconds
-        // TODO: Format as "HH:MM:SS" with zero-padding
-        // Hint: Use String.format() with %02d for zero-padding
+        // Convert seconds since midnight back to hours, minutes, seconds
+        int hours = secondsSinceMidnight / 3600;
+        int minutes = (secondsSinceMidnight % 3600) / 60;
+        int seconds = secondsSinceMidnight % 60;
         
-        throw new UnsupportedOperationException("getDecimal() not yet implemented");
+        // Format as "HH:MM:SS" with zero-padding
+        return String.format("%02d:%02d:%02d", hours, minutes, seconds);
     }
     
     /**
@@ -72,11 +85,11 @@ public class DigitalClock {
      * @return 16-bit binary representation (e.g., "0000000000101010")
      */
     public String getBinary() {
-        // TODO: Convert seconds since midnight to binary string
-        // TODO: Pad to 16 bits
-        // Hint: Use Integer.toBinaryString() and String.format()
+        // Convert seconds since midnight to binary string
+        String binary = Integer.toBinaryString(secondsSinceMidnight);
         
-        throw new UnsupportedOperationException("getBinary() not yet implemented");
+        // Pad to 16 bits
+        return String.format("%16s", binary).replace(' ', '0');
     }
     
     /**
@@ -88,11 +101,11 @@ public class DigitalClock {
      * @return Hexadecimal representation (e.g., "0x1517F")
      */
     public String getHex() {
-        // TODO: Convert seconds since midnight to hexadecimal string
-        // TODO: Add "0x" prefix and use uppercase
-        // Hint: Use Integer.toHexString() and String.format()
+        // Convert seconds since midnight to hexadecimal string
+        String hex = Integer.toHexString(secondsSinceMidnight).toUpperCase();
         
-        throw new UnsupportedOperationException("getHex() not yet implemented");
+        // Add "0x" prefix and pad to 4 digits
+        return String.format("0x%04X", secondsSinceMidnight);
     }
     
     /**
@@ -101,9 +114,7 @@ public class DigitalClock {
      * @return Number of seconds since midnight [0, 86399]
      */
     public int getSecondsSinceMidnight() {
-        // TODO: Return the internal field value
-        
-        throw new UnsupportedOperationException("getSecondsSinceMidnight() not yet implemented");
+        return secondsSinceMidnight;
     }
     
     /**
