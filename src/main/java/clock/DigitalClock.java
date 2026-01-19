@@ -120,55 +120,107 @@ public class DigitalClock {
     }
     
     /**
-     * Demonstrates the DigitalClock class with various examples.
+     * Demonstrates what the DigitalClock class should do once implemented.
      * 
      * @param args Command line arguments (not used)
      */
     public static void main(String[] args) {
         System.out.println("============================================================");
-        System.out.println("Digital Clock Demo");
+        System.out.println("Digital Clock Demo - Expected Behavior");
         System.out.println("============================================================");
+        System.out.println("\nThis shows what your DigitalClock should do once implemented.");
+        System.out.println("Currently, the methods throw UnsupportedOperationException.\n");
         
         // Example 1: Afternoon time
-        System.out.println("\nExample 1: Afternoon (2:37:42 PM)");
-        DigitalClock clock1 = new DigitalClock(14, 37, 42);
-        System.out.println(clock1);
+        System.out.println("Example 1: Afternoon (2:37:42 PM)");
+        try {
+            DigitalClock clock1 = new DigitalClock(14, 37, 42);
+            System.out.println(clock1);
+        } catch (UnsupportedOperationException e) {
+            System.out.println("  [NOT IMPLEMENTED] Expected output:");
+            System.out.println("  DigitalClock:");
+            System.out.println("    Decimal: 14:37:42");
+            System.out.println("    Binary:  1100110110110110");
+            System.out.println("    Hex:     0xCDB6");
+            System.out.println("    Seconds: 52662");
+        }
         
         // Example 2: Midnight
         System.out.println("\nExample 2: Midnight");
-        DigitalClock clock2 = new DigitalClock(0, 0, 0);
-        System.out.println(clock2);
+        try {
+            DigitalClock clock2 = new DigitalClock(0, 0, 0);
+            System.out.println(clock2);
+        } catch (UnsupportedOperationException e) {
+            System.out.println("  [NOT IMPLEMENTED] Expected output:");
+            System.out.println("  DigitalClock:");
+            System.out.println("    Decimal: 00:00:00");
+            System.out.println("    Binary:  0000000000000000");
+            System.out.println("    Hex:     0x0000");
+            System.out.println("    Seconds: 0");
+        }
         
         // Example 3: End of day
         System.out.println("\nExample 3: End of Day (11:59:59 PM)");
-        DigitalClock clock3 = new DigitalClock(23, 59, 59);
-        System.out.println(clock3);
+        try {
+            DigitalClock clock3 = new DigitalClock(23, 59, 59);
+            System.out.println(clock3);
+        } catch (UnsupportedOperationException e) {
+            System.out.println("  [NOT IMPLEMENTED] Expected output:");
+            System.out.println("  DigitalClock:");
+            System.out.println("    Decimal: 23:59:59");
+            System.out.println("    Binary:  10101000101111111");
+            System.out.println("    Hex:     0x1517F");
+            System.out.println("    Seconds: 86399");
+        }
         
         // Example 4: Morning
         System.out.println("\nExample 4: Morning (9:05:03 AM)");
-        DigitalClock clock4 = new DigitalClock(9, 5, 3);
-        System.out.println(clock4);
+        try {
+            DigitalClock clock4 = new DigitalClock(9, 5, 3);
+            System.out.println(clock4);
+        } catch (UnsupportedOperationException e) {
+            System.out.println("  [NOT IMPLEMENTED] Expected output:");
+            System.out.println("  DigitalClock:");
+            System.out.println("    Decimal: 09:05:03");
+            System.out.println("    Binary:  0111111110111111");
+            System.out.println("    Hex:     0x7FBF");
+            System.out.println("    Seconds: 32703");
+        }
         
         // Example 5: Error handling
         System.out.println("\nExample 5: Error Handling");
         try {
             new DigitalClock(25, 0, 0);
+            System.out.println("  [ERROR] Should have thrown IllegalArgumentException for hours=25");
         } catch (IllegalArgumentException e) {
-            System.out.println("  Caught error: " + e.getMessage());
+            System.out.println("  ✓ Caught error: " + e.getMessage());
+        } catch (UnsupportedOperationException e) {
+            System.out.println("  [NOT IMPLEMENTED] Should throw IllegalArgumentException for hours=25");
         }
         
         try {
             new DigitalClock(12, 60, 0);
+            System.out.println("  [ERROR] Should have thrown IllegalArgumentException for minutes=60");
         } catch (IllegalArgumentException e) {
-            System.out.println("  Caught error: " + e.getMessage());
+            System.out.println("  ✓ Caught error: " + e.getMessage());
+        } catch (UnsupportedOperationException e) {
+            System.out.println("  [NOT IMPLEMENTED] Should throw IllegalArgumentException for minutes=60");
         }
         
         try {
             new DigitalClock(12, 30, -5);
+            System.out.println("  [ERROR] Should have thrown IllegalArgumentException for seconds=-5");
         } catch (IllegalArgumentException e) {
-            System.out.println("  Caught error: " + e.getMessage());
+            System.out.println("  ✓ Caught error: " + e.getMessage());
+        } catch (UnsupportedOperationException e) {
+            System.out.println("  [NOT IMPLEMENTED] Should throw IllegalArgumentException for seconds=-5");
         }
         
         System.out.println("\n============================================================");
+        System.out.println("To test your implementation:");
+        System.out.println("  1. Complete the TODOs in the DigitalClock class");
+        System.out.println("  2. Run: ./gradlew test");
+        System.out.println("  3. All 62 tests should pass!");
+        System.out.println("============================================================");
     }
 }
