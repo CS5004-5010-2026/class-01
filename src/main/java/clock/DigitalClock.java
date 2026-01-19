@@ -118,4 +118,57 @@ public class DigitalClock {
         return String.format("DigitalClock:\n  Decimal: %s\n  Binary:  %s\n  Hex:     %s\n  Seconds: %d",
                 getDecimal(), getBinary(), getHex(), getSecondsSinceMidnight());
     }
+    
+    /**
+     * Demonstrates the DigitalClock class with various examples.
+     * 
+     * @param args Command line arguments (not used)
+     */
+    public static void main(String[] args) {
+        System.out.println("============================================================");
+        System.out.println("Digital Clock Demo");
+        System.out.println("============================================================");
+        
+        // Example 1: Afternoon time
+        System.out.println("\nExample 1: Afternoon (2:37:42 PM)");
+        DigitalClock clock1 = new DigitalClock(14, 37, 42);
+        System.out.println(clock1);
+        
+        // Example 2: Midnight
+        System.out.println("\nExample 2: Midnight");
+        DigitalClock clock2 = new DigitalClock(0, 0, 0);
+        System.out.println(clock2);
+        
+        // Example 3: End of day
+        System.out.println("\nExample 3: End of Day (11:59:59 PM)");
+        DigitalClock clock3 = new DigitalClock(23, 59, 59);
+        System.out.println(clock3);
+        
+        // Example 4: Morning
+        System.out.println("\nExample 4: Morning (9:05:03 AM)");
+        DigitalClock clock4 = new DigitalClock(9, 5, 3);
+        System.out.println(clock4);
+        
+        // Example 5: Error handling
+        System.out.println("\nExample 5: Error Handling");
+        try {
+            new DigitalClock(25, 0, 0);
+        } catch (IllegalArgumentException e) {
+            System.out.println("  Caught error: " + e.getMessage());
+        }
+        
+        try {
+            new DigitalClock(12, 60, 0);
+        } catch (IllegalArgumentException e) {
+            System.out.println("  Caught error: " + e.getMessage());
+        }
+        
+        try {
+            new DigitalClock(12, 30, -5);
+        } catch (IllegalArgumentException e) {
+            System.out.println("  Caught error: " + e.getMessage());
+        }
+        
+        System.out.println("\n============================================================");
+    }
 }
